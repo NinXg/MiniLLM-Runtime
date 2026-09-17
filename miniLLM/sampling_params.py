@@ -8,7 +8,7 @@ class SamplingParams:
     temperature: float = 0.0
     top_k: int = 0
     top_p: float = 1.0
-    max_tokens: int = 64
+    max_tokens: int = 1024
 
     def __post_init__(self):
         if not math.isfinite(self.temperature) or self.temperature < 0:

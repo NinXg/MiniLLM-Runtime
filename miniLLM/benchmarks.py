@@ -10,9 +10,9 @@ from . import LLMEngine, SamplingParams
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True)
-    parser.add_argument("--prompt", default="请简单介绍大语言模型")
+    parser.add_argument("--prompt", default="tell me what is justice")
     parser.add_argument("--num-prompts", type=int, default=4)
-    parser.add_argument("--max-tokens", type=int, default=32)
+    parser.add_argument("--max-tokens", type=int, default=1024)
     parser.add_argument("--repeat", type=int, default=3)
     parser.add_argument("--warmup", type=int, default=1)
     parser.add_argument("--device", default=None)
