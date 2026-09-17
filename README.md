@@ -12,6 +12,6 @@ python -m miniLLM.benchmarks --model ~/huggingface/Qwen2.5-0.5B-Instruct
 ```
 
 ## 参考
-
+[nanovllm 源代码](https://github.com/GeeeekExplorer/nano-vllm)
 [Qwen2.5 官方配置](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/blob/main/config.json)
-[Transformers Qwen2 源码](https://github.com/huggingface/transformers/blob/v4.51.3/src/transformers/models/qwen2/modeling_qwen2.py)
+[Transformers Qwen2 源代码](https://github.com/huggingface/transformers/blob/v4.51.3/src/transformers/models/qwen2/modeling_qwen2.py)
