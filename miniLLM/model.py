@@ -4,7 +4,6 @@ import argparse
 from .runtime.engine import LLMEngine
 from .sampling_params import SamplingParams
 
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", default="~/huggingface/Qwen2.5-0.5B-Instruct")

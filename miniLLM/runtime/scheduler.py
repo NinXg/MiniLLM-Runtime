@@ -14,7 +14,7 @@ class Scheduler:
 
     def add(self, seq):
         if not seq.prompt or seq.capacity > self.cache.num_blocks * self.cache.block_size:
-            raise ValueError("输入为空或请求超过缓存总容量")
+            raise ValueError("输入为空/请求超过缓存总容量")
         self.waiting.append(seq)
 
     def schedule(self):

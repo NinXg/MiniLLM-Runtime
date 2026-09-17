@@ -13,7 +13,7 @@ class Sequence:
     cached: int = 0
     finish_reason: str | None = None
 
-    @property
+    @property #包装为属性
     def capacity(self):
         # 最后采样出的词不再送入模型所以少一个位置
         return len(self.prompt) + self.params.max_tokens - 1

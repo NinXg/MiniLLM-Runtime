@@ -18,13 +18,14 @@ class ModelRunner:
         self.kv_heads = cfg.num_key_value_heads
         self.dim = cfg.hidden_size // self.heads
         if self.dim % 2 or self.heads % self.kv_heads:
-            raise ValueError("模型的注意力头配置不受支持")
+            raise ValueError("模型注意力头配置不支持")
         self.cache = KVCache(cfg.num_hidden_layers, num_blocks, block_size,
                              self.kv_heads, self.dim, weight.dtype, self.device)
         exponent = torch.arange(0, self.dim, 2, device=self.device).float() / self.dim
         self.inv_freq = 1.0 / cfg.rope_theta ** exponent
 
     def rope(self, x, positions):
+        # RoPE位置编码
         angles = positions.float()[:, None] * self.inv_freq[None, :]
         angles = torch.cat((angles, angles), dim=-1)[:, None, :]
         cos, sin = angles.cos().to(x.dtype), angles.sin().to(x.dtype)
@@ -32,9 +33,9 @@ class ModelRunner:
         rotated = torch.cat((-right, left), dim=-1)
         return x * cos + rotated * sin
 
-    @torch.inference_mode()
+    @torch.inference_mode()#推理模式
     def forward(self, seq):
-        # 首轮处理全部输入后续每轮只处理上次生成的词
+        # 首轮处理全部输入encode 后续每轮只处理上次生成的词decode
         tokens = seq.prompt if seq.cached == 0 else seq.output[-1:]
         if not tokens:
             raise ValueError("当前没有可计算的词")

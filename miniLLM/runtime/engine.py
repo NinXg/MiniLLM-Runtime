@@ -23,6 +23,7 @@ class LLMEngine:
         self.eos_ids = set(eos if isinstance(eos, list) else [eos])
         self.eos_ids.add(self.tokenizer.eos_token_id)
 
+        
     def generate(self, prompts, sampling_params=None):
         if self.runner is None:
             raise RuntimeError("引擎已关闭")
@@ -56,7 +57,7 @@ class LLMEngine:
                      "token_ids": seq.output, "finish_reason": seq.finish_reason}
                     for seq in seqs]
         finally:
-            # 出错时也要归还已经占用的块
+            # 出错 要归还已经占用的块
             self.scheduler.clear()
 
     def close(self):

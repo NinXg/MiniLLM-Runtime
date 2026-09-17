@@ -1,10 +1,9 @@
-"""使用块表读取缓存的注意力"""
+"""使用块表读取kvcache"""
 
 import torch
 
-
 def paged_attention(q, cache, layer, table, start):
-    # 输入形状是词数查询头数头维度
+    # 输入形状是 词数 查询头数 头维度
     count, heads, dim = q.shape
     length = start + count
     if count < 1 or start < 0 or length > len(table) * cache.block_size:
